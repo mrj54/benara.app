@@ -65,7 +65,7 @@ body.dark .chapter-btn {
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    overflow: visible;
     transition: transform 0.3s;
     position: relative;
     margin-bottom: 2rem;
@@ -107,39 +107,51 @@ body.dark .chapter-btn {
     background: linear-gradient(135deg, #794cb5 0%, #9c6de2 100%);
     color: white;
     padding: 0.75rem;
-    border-radius: 12px;
-    max-width: 250px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 20px 20px 20px 5px;
+    max-width: 300px;
+    width: max-content;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     z-index: 200;
     text-align: center;
     font-size: 0.9rem;
-    bottom: 100%;
+    top: -10px;
+    /* Menggeser ke atas sedikit dari batas kontainer */
     left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 10px;
+    transform: translateX(-50%) translateY(-100%);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
 }
 
 .bubble-chat::after {
     content: '';
     position: absolute;
-    top: 100%;
+    bottom: 0;
     left: 50%;
     margin-left: -8px;
     border-width: 8px;
     border-style: solid;
     border-color: #9c6de2 transparent transparent transparent;
+    transform: translateY(100%);
 }
 
 .bubble-chat.show {
     opacity: 1;
     visibility: visible;
+    transform: translateX(-50%) translateY(-100%);
 }
 
 body.dark .mobile-nav {
     background: linear-gradient(135deg, #553b8e 0%, #794cb5 100%);
+}
+
+body.dark .bubble-chat {
+    background: linear-gradient(135deg, #553b8e 0%, #794cb5 100%);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .bubble-chat::after {
+    border-color: #553b8e transparent transparent transparent;
 }
 
 .theme-toggle {
@@ -161,5 +173,66 @@ body.dark .theme-toggle {
 .chapter-buttons-container {
     position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem 0.5rem;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 0 15px;
+        padding-bottom: 80px;
+    }
+
+    .story-card {
+        max-width: 100%;
+        width: 100%;
+        margin: 1rem auto;
+    }
+
+    .bubble-chat {
+        position: fixed;
+        top: auto;
+        bottom: 70px;
+        /* Posisi di atas navbar mobile */
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: calc(100% - 40px);
+        /* Sesuaikan lebar layar */
+        width: max-content;
+        margin: 0 auto;
+        z-index: 300;
+    }
+
+    .bubble-chat::after {
+        left: 50%;
+        margin-left: -8px;
+        border-color: #9c6de2 transparent transparent transparent;
+        bottom: -16px;
+        transform: rotate(180deg);
+    }
+}
+
+@media (min-width: 769px) {
+    .story-card {
+        max-width: 600px;
+        margin: 2rem auto;
+    }
+
+    .bubble-chat {
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-100%);
+    }
+
+    .bubble-chat::after {
+        bottom: 0;
+        left: 50%;
+        margin-left: -8px;
+        border-color: #9c6de2 transparent transparent transparent;
+        transform: translateY(100%);
+    }
 }

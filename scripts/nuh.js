@@ -2,38 +2,38 @@
 const storyPages = {
     1: {
         title: "Membangun Kapal",
-        mainImage: "../img beranda/kapal berlayar.jpg",
+        mainImage: "../asset/laut nuh.jpg",
         text: "Allah memerintahkan Nabi Nuh untuk membangun sebuah kapal yang sangat besar. Meskipun banyak yang mengejek, Nabi Nuh tetap sabar dan taat pada perintah Allah.",
         funFact: "Nabi Nuh membangun kapal dengan tangannya sendiri dan membutuhkan waktu yang sangat lama!",
-        funFactImage: "../img beranda/kapal solo.jpg"
+        funFactImage: "../asset/nuh solo-2.jpg"
     },
     2: {
         title: "Hujan Lebat",
         mainImage: "../nuh.jpg/hujan.jpg/",
         text: "Kemudian turunlah hujan yang sangat lebat selama berhari-hari. Air mulai naik dan banjir melanda di mana-mana. Nabi Nuh mengajak orang-orang beriman untuk naik ke dalam kapal.",
         funFact: "Nabi Nuh juga membawa berbagai jenis hewan berpasangan ke dalam kapal!",
-        funFactImage: "../img beranda/kapal berlayar.jpg"
+        funFactImage: "../asset/nabi nuh2.jpg"
     },
     3: {
         title: "Berlayar di Air Bah",
         mainImage: "../nuh.jpg/layar.jpg",
         text: "Kapal Nabi Nuh berlayar di atas air bah yang sangat tinggi. Semua yang berada di dalam kapal selamat berkat pertolongan Allah SWT.",
         funFact: "Air bah menutupi seluruh permukaan bumi, bahkan sampai ke puncak gunung tertinggi!",
-        funFactImage: "image/banjir.jpg"
+        funFactImage: "../nuh.jpg/layar.jpg"
     },
     4: {
         title: "Air Surut",
         mainImage: "../nuh.jpg/gunung.jpg",
         text: "Setelah beberapa lama, hujan pun berhenti dan air mulai surut. Kapal Nabi Nuh akhirnya berhenti di atas Gunung Judi.",
         funFact: "Nabi Nuh mengirim burung merpati untuk mencari tahu apakah air sudah surut!",
-        funFactImage: "image/burung.jpg"
+        funFactImage: "../asset/nuh tamat-.jpg"
     },
     5: {
         title: "Kehidupan Baru",
         mainImage: "../nuh.jpg/hidup.jpg",
         text: "Setelah air surut sepenuhnya, Nabi Nuh dan pengikutnya turun dari kapal untuk memulai kehidupan baru di bumi yang telah dibersihkan.",
         funFact: "Semua manusia yang ada di bumi saat ini adalah keturunan dari orang-orang yang selamat dalam kapal Nabi Nuh!",
-        funFactImage: "image/keluarga.jpg"
+        funFactImage: "../asset/nuh gunung-.jpg"
     }
 };
 
