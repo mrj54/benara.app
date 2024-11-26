@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benara - Islamic Education App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f0f7ff;
+    min-height: 100vh;
+}
+
+.menu-item {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+}
+
+.floating {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.badge {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+    .main-container {
+        max-width: 100%;
+        min-height: 100vh;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .header {
+        padding: 16px 0;
+    }
+
+    .menu-items {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 16px 0;
+        margin-bottom: 80px; /* Space for bottom nav */
+    }
+
+    .menu-item {
+        min-height: 100px;
+        padding: 16px;
+        border-radius: 20px;
+    }
+
+    .menu-item .image-container {
+        width: 64px;
+        height: 64px;
+    }
+
+    .bottom-nav {
+        padding: 16px;
+        border-radius: 24px 24px 0 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: white;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+    }
+}
+
+/* Tablet styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .main-container {
+        padding: 24px;
+        min-height: 100vh;
+    }
+
+    .menu-items {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        padding: 24px 0;
+    }
+
+    .menu-item {
+        min-height: 120px;
+        border-radius: 20px;
+    }
+}
+
+/* Desktop styles - keeping original layout */
+@media (min-width: 1024px) {
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e0eafc 100%);
+        padding: 2rem;
+    }
+
+    .main-container {
+        max-width: 90%;
+        width: 1400px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 40px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: relative;
+        padding: 2rem 3rem;
+    }
+
+    .menu-items {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        padding: 2rem 1rem;
+    }
+
+    .menu-item {
+        height: 240px;
+        display: flex;
+        align-items: center;
+        padding: 2rem 3rem;
+        border-radius: 30px;
+    }
+
+    .menu-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .menu-item .image-container {
+        width: 160px;
+        height: 160px;
+    }
+
+    .bottom-nav {
+        position: static;
+        margin-top: 2rem;
+        border-radius: 20px;
+        padding: 1.5rem 3rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Height-based responsive adjustments */
+@media (max-height: 700px) and (max-width: 767px) {
+    .menu-items {
+        gap: 12px;
+    }
+
+    .menu-item {
+        min-height: 80px;
+        padding: 12px;
+    }
+
+    .menu-item .image-container {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+@media (min-height: 800px) and (max-width: 767px) {
+    .menu-items {
+        gap: 24px;
+    }
+
+    .menu-item {
+        min-height: 120px;
+    }
+}
+
+/* Extra Large Desktop Styles */
+@media (min-width: 1536px) {
+    .main-container {
+        width: 1600px;
+        max-width: 95%;
+    }
+
+    .menu-items {
+        gap: 3rem;
+    }
+
+    .menu-item {
+        height: 280px;
+    }
+}
+/* Desktop styles - adding larger text sizes */
+@media (min-width: 1024px) {
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f0f7ff 0%, #e0eafc 100%);
+        padding: 2rem;
+    }
+
+    .main-container {
+        max-width: 90%;
+        width: 1400px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 40px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: relative;
+        padding: 2rem 3rem;
+    }
+
+    .menu-items {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        padding: 2rem 1rem;
+    }
+
+    .menu-item {
+        height: 240px;
+        display: flex;
+        align-items: center;
+        padding: 2rem 3rem;
+        border-radius: 30px;
+    }
+
+    /* New text size adjustments for desktop */
+    .menu-item span.font-bold {
+        font-size: 1.75rem; /* Increased from default */
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .menu-item p {
+        font-size: 1.25rem; /* Increased from default */
+        line-height: 1.5;
+    }
+
+    /* Adjust spacing between title and description */
+    .menu-item .flex-grow {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .menu-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .menu-item .image-container {
+        width: 160px;
+        height: 160px;
+    }
+}
+
+/* Extra Large Desktop Styles */
+@media (min-width: 1536px) {
+    .main-container {
+        width: 1600px;
+        max-width: 95%;
+    }
+
+    .menu-items {
+        gap: 3rem;
+    }
+
+    .menu-item {
+        height: 280px;
+    }
+
+    /* Even larger text for extra large screens */
+    .menu-item span.font-bold {
+        font-size: 2rem;
+    }
+
+    .menu-item p {
+        font-size: 1.4rem;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="header">
+            <div class="flex justify-between items-center bg-white rounded-2xl p-4 shadow-lg">
+                <div class="flex items-center gap-3">
+                    <div class="relative floating">
+                        <img src="../logo/benara (1) (1).png" alt="Logo" class="h-12 w-12 rounded-xl shadow-md">
+                        <div
+                            class="badge bg-yellow-400 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
+                            ✨</div>
+                    </div>
+                    <span
+                        class="text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">BENARA</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="flex flex-col items-end">
+                        <span class="text-gray-600 font-bold text-sm sm:text-base lg:text-lg">HALLO,</span>
+                        <span id="welcomeMessage" class="text-blue-600 font-bold text-base sm:text-lg lg:text-xl">masjan
+                            hidayat</span>
+                    </div>
+                    <div
+                        class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center shadow-md hover:bg-blue-200 transition-colors cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:h-7 lg:w-7 text-blue-600"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-items">
+            <a href="../beranda/nama-nama-nabi.html"
+                class="menu-item flex items-center bg-gradient-to-r from-blue-500 to-blue-400 pl-8 pr-4 py-4 cursor-pointer shadow-lg transform hover:scale-[1.02] transition-all">
+                <div class="flex-grow">
+                    <span class="text-white font-bold">NAMA NAMA NABI</span>
+                    <p class="text-blue-100">Belajar tentang 25 Nabi</p>
+                </div>
+                <div class="rounded-full overflow-hidden bg-white p-1 shadow-inner image-container">
+                    <img src="../img beranda/kusta.jpg" alt="Prophets" class="w-full h-full object-cover rounded-full">
+                </div>
+            </a>
+
+            <a href="../beranda/ulul-azmi.html"
+                class="menu-item flex items-center bg-gradient-to-r from-purple-500 to-purple-400 pl-8 pr-4 py-4 cursor-pointer shadow-lg transform hover:scale-[1.02] transition-all">
+                <div class="flex-grow">
+                    <span class="text-white font-bold">RASUL ULUL AZMI</span>
+                    <p class="text-purple-100">Kisah 5 Rasul Istimewa</p>
+                </div>
+                <div class="rounded-full overflow-hidden bg-white p-1 shadow-inner image-container">
+                    <img src="../img beranda/isra mikraj.jpg" alt="Messengers"
+                        class="w-full h-full object-cover rounded-full">
+                </div>
+            </a>
+
+            <a href="../beranda/kisah-inspirasi.html"
+                class="menu-item flex items-center bg-gradient-to-r from-green-500 to-green-400 pl-8 pr-4 py-4 cursor-pointer shadow-lg transform hover:scale-[1.02] transition-all">
+                <div class="flex-grow">
+                    <span class="text-white font-bold">KISAH INSPIRASI</span>
+                    <p class="text-green-100">Cerita-cerita Menarik</p>
+                </div>
+                <div class="rounded-full overflow-hidden bg-white p-1 shadow-inner image-container">
+                    <img src="../img beranda/inspirasi.jpg" alt="Inspiration"
+                        class="w-full h-full object-cover rounded-full">
+                </div>
+            </a>
+
+            <a href="../evalhtml/quiz.html"
+                class="menu-item flex items-center bg-gradient-to-r from-orange-500 to-orange-400 pl-8 pr-4 py-4 cursor-pointer shadow-lg transform hover:scale-[1.02] transition-all">
+                <div class="flex-grow">
+                    <span class="text-white font-bold">AYO BERLATIH</span>
+                    <p class="text-orange-100">Quiz Seru & Menarik</p>
+                </div>
+                <div class="rounded-full overflow-hidden bg-white p-1 shadow-inner image-container">
+                    <img src="../img beranda/soal.jpg" alt="Practice" class="w-full h-full object-cover rounded-full">
+                </div>
+            </a>
+        </div>
+
+        <div
+            class="bottom-nav bg-white text-blue-600 flex justify-between rounded-t-3xl shadow-[0_-4px_20px_rgba(0,0,0,0.1)] border-t-4 border-blue-500">
+            <div class="flex items-center gap-3 cursor-pointer hover:text-blue-800 transition-colors nav-item">
+                <div class="bg-blue-100 p-2 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                </div>
+                <span class="text-sm font-medium">Home</span>
+            </div>
+            <div class="flex items-center gap-3 cursor-pointer hover:text-blue-800 transition-colors nav-item">
+                <div class="bg-blue-100 p-2 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </div>
+                <a href="../beranda/profil.html"><span class="text-sm font-medium">Profile</span></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            gsap.from(".menu-item", {
+                duration: 0.8,
+                y: 50,
+                opacity: 0,
+                stagger: 0.2,
+                ease: "power2.out",
+                onComplete() {
+                    gsap.set(".menu-item", { clearProps: "all" });
+                }
+            });
+        });
+
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function () {
+                gsap.to(this, {
+                    scale: 0.95,
+                    duration: 0.1,
+                    yoyo: true,
+                    repeat: 1
+                });
+                console.log('Clicked:', this.querySelector('span').textContent);
+            });
+        });
+
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('welcomeMessage').innerText = username;
+        } else {
+            document.getElementById('welcomeMessage').innerText = 'Pengguna';
+                }
+
+                function updateLayoutForScreenSize() {
+                    const mainContainer = document.querySelector('.main-container');
+                    const menuItems = document.querySelector('.menu-items');
+
+                    // Adjust layout based on screen height
+                    if (window.innerHeight < 700) {
+                        menuItems.style.gap = '0.75rem';
+                        mainContainer.style.padding = '0.75rem';
+                    } else if (window.innerHeight > 800 && window.innerWidth < 768) {
+                        menuItems.style.gap = '1.5rem';
+                        mainContainer.style.padding = '1.5rem';
+                    }
+
+                    // Adjust for very tall mobile screens
+                    if (window.innerHeight > 900 && window.innerWidth < 768) {
+                        const items = document.querySelectorAll('.menu-item');
+                        items.forEach(item => {
+                            item.style.minHeight = '140px';
+                        });
+                    }
+                }
+
+                // Run on page load and window resize
+                window.addEventListener('load', updateLayoutForScreenSize);
+                window.addEventListener('resize', updateLayoutForScreenSize);
+
+                // Fungsi logout untuk menghapus data username dan kembali ke halaman login
+                function logout() {
+                    localStorage.removeItem('username');
+                    window.location.href = 'login.html';
+                }
+
+                // Add touch feedback for mobile devices
+                document.querySelectorAll('.menu-item, .nav-item').forEach(item => {
+                    item.addEventListener('touchstart', function () {
+                        this.style.opacity = '0.8';
+                    });
+
+                    item.addEventListener('touchend', function () {
+                        this.style.opacity = '1';
+                    });
+                });
+
+                // Optimize performance for mobile devices
+                let resizeTimer;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(updateLayoutForScreenSize, 250);
+                });
+
+                // Prevent rubber-band scrolling on iOS
+                document.body.addEventListener('touchmove', function (e) {
+                    if (this.scrollTop === 0 && this.scrollHeight === window.innerHeight) {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+            </script>
+    </body>
+    
+    </html>
