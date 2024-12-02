@@ -43,10 +43,10 @@ searchInput.addEventListener('input', (e) => {
 renderProphets(prophetNames);
 
 function navigateHome() {
-    window.location.href = '../isihtml/index.html';
+    window.location.href = '../index.html';
 }
 
 // Fungsi untuk navigasi ke halaman Profile
 function navigateProfile() {
-    window.location.href = '../beranda/profile.html';
+    window.location.href = '../beranda/profil.html';
 }
