@@ -1,10 +1,10 @@
  // Initialize GSAP animations
  window.addEventListener('DOMContentLoaded', () => {
     gsap.from(".menu-item", {
-        duration: 0.8,
+        duration: 0.4,
         y: 50,
         opacity: 0,
-        stagger: 0.2,
+        stagger: 0.1,
         ease: "power2.out",
         onComplete() {
             gsap.set(".menu-item", { clearProps: "all" });
