@@ -1,9 +1,9 @@
 function handleLogin(event) {
       event.preventDefault();
       const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
+      const sekolah = document.getElementById('sekolah').value;
 
-      if (username && password) {
+      if (username && sekolah) {
         localStorage.setItem('username', username);
 
         // Add playful animation before redirect
