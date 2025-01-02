@@ -12,7 +12,7 @@ function handleLogin(event) {
         setTimeout(() => {
           form.style.transform = 'scale(1)';
           setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = 'beranda.html';
           }, 200);
         }, 200);
       }
